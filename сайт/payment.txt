@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Платежное окно</title>
+</head>
+<body>
+  <h2>Оплата</h2>
+  <form action="#" method="post">
+    <label for="name">Имя:</label>
+    <input type="text" id="name" name="name" required><br><br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+    <button type="submit">Оплатить</button>
+  </form>
+</body>
+</html>
+<?php
+    // Проверка,  была ли  отправлена  форма 
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Получение  данных  из  формы
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+
+        // Валидация  данных  (необязательно,  но  рекомендуется)
+        // ...
+
+        // Отправка  письма  с  помощью  функции  mail()
+        $to = "anton999pro@mail.ru"; // Ваш  email
+        $subject = "Новый  заказ  с  сайта"; 
+        $message = "Имя: " . $name . "\nEmail: " . $email;
+        $headers = "From: anton999pro@mail.ru"; // Замените  на  вашу  почту
+
+        if (mail($to, $subject, $message, $headers)) {
+            echo "Сообщение успешно отправлено!";
+        } else {
+            echo "Ошибка отправки сообщения.";
+        }
+    }
+?>
